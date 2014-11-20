@@ -1,17 +1,21 @@
 package addressbook;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
-import java.util.StringTokenizer;
+
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 public class FileAddressProvider extends AddressProvider {
 
 	public String name = "file";
 
 	public List<Contact> provideAddresses() {
+		readContacts();
 		return contacts;
 	}
 
@@ -19,12 +23,12 @@ public class FileAddressProvider extends AddressProvider {
 		return name;
 	}
 	public void readContacts(){
-		FileReader fr = null;
+		Reader r = null;
 		BufferedReader br = null;
 		
 		try {
-			fr = new FileReader("contacts.csv");
-			br = new BufferedReader(fr);
+			r = new FileReader("bin/contacts.csv");
+			br = new BufferedReader(r);
 			while (true){
 				String line = br.readLine();
 				if (line == null)
@@ -39,7 +43,7 @@ public class FileAddressProvider extends AddressProvider {
 		}finally{
 			try{
 				if (br!= null) br.close();
-				if (fr!=null) fr.close();
+				if (r!=null) r.close();
 			}catch (IOException e){
 				System.err.println("Error2 :" +e);
 			}

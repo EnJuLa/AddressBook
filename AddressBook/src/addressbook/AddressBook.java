@@ -64,6 +64,7 @@ public class AddressBook {
 	
 	public void processListCommand(String[] args){
 		if (args.length > 1){
+			System.out.println("Provider: " + args[1]);
 			AddressProvider addressProvider = searchAddressProvider(args[1]);
 			if (addressProvider == null){
 				System.out.println("Der gewählte Adresslieferant ist nicht vorhanden.");
